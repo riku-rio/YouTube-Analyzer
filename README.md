@@ -82,6 +82,12 @@ youtube-analyzer-extension/
 
 ---
 
+## 🎥 Demo
+
+Paste a YouTube URL → Get full AI analysis instantly
+
+---
+
 ## 🧠 How It Works
 
 1. Paste a YouTube video URL
