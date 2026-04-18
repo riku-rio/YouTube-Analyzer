@@ -1,0 +1,362 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  width: 400px;
+  min-height: 500px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.container {
+  padding: 16px;
+}
+
+header {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #00bf63;
+}
+
+.settings-link {
+  position: absolute;
+  right: 0;
+  text-decoration: none;
+  font-size: 18px;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.settings-link:hover {
+  opacity: 1;
+}
+
+.input-section {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+#videoUrl {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+#videoUrl:focus {
+  outline: none;
+  border-color: #00bf63;
+}
+
+#videoUrl.valid {
+  border-color: #28a745;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2328a745' viewBox='0 0 16 16'%3E%3Cpath d='M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 36px;
+}
+
+#videoUrl.invalid {
+  border-color: #dc3545;
+}
+
+#analyzeBtn {
+  padding: 10px 16px;
+  background-color: #00bf63;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#analyzeBtn:hover {
+  background-color: #00bf63;
+}
+
+#analyzeBtn:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #00bf63;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 12px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading p {
+  font-size: 14px;
+  color: #666;
+}
+
+.error {
+  padding: 12px;
+  background-color: #fee;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  color: #c00;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.results {
+  margin-top: 16px;
+}
+
+.thumbnail-display {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  display: block;
+}
+
+#thumbnailLink {
+  display: block;
+}
+
+#thumbnailSection {
+  margin-top: 16px;
+}
+
+#thumbnailSection .thumbnail-display {
+  display: block;
+  margin-bottom: 0;
+}
+
+#thumbnailSection.hidden {
+  display: none;
+}
+
+.results.hidden {
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+#analysisContent {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+#analysisContent section {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+#analysisContent section:last-child {
+  border-bottom: none;
+}
+
+#analysisContent h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+#analysisContent p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+}
+
+#analysisContent ul {
+  margin-left: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+}
+
+#analysisContent li {
+  margin-bottom: 4px;
+}
+
+#analysisContent h1,
+#analysisContent h2,
+#analysisContent h3 {
+  font-weight: 600;
+  color: #333;
+  margin: 16px 0 8px 0;
+}
+
+#analysisContent h1 { font-size: 18px; }
+#analysisContent h2 { font-size: 16px; }
+#analysisContent h3 { font-size: 14px; }
+
+#analysisContent strong {
+  font-weight: 600;
+  color: #222;
+}
+
+#analysisContent a {
+  color: #00bf63;
+  text-decoration: none;
+}
+
+#analysisContent a:hover {
+  text-decoration: underline;
+}
+
+#analysisContent code {
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+#analysisContent blockquote {
+  border-left: 3px solid #00bf63;
+  margin: 8px 0;
+  padding-left: 12px;
+  color: #666;
+}
+
+.final-score {
+  font-size: 24px;
+  font-weight: 700;
+  color: #00bf63;
+}
+
+#thumbnailAnalysisSection {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid #00bf63;
+}
+
+#thumbnailAnalysisSection h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #00bf63;
+  margin-bottom: 12px;
+}
+
+#thumbnailAnalysisContent {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#thumbnailAnalysisContent section {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+#thumbnailAnalysisContent section:last-child {
+  border-bottom: none;
+}
+
+#thumbnailAnalysisContent h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+#thumbnailAnalysisContent p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+}
+
+#analysisContent hr {
+  border: none;
+  border-top: 2px solid #ddd;
+  margin: 16px 0;
+}
+
+.thumbnail-score {
+  font-size: 20px;
+  font-weight: 700;
+  color: #00bf63;
+  display: inline-block;
+  margin: 8px 0;
+  padding: 4px 12px;
+  background: #f0fff9;
+  border-radius: 4px;
+}
+
+#finalSummarySection {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid #ff0000;
+}
+
+#finalSummarySection h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ff0000;
+  margin-bottom: 12px;
+}
+
+#finalSummaryContent {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#finalSummaryContent section {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+#finalSummaryContent section:last-child {
+  border-bottom: none;
+}
+
+#finalSummaryContent h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+#finalSummaryContent p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+}
+
+#finalSummaryContent ul {
+  margin-left: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+}
