@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Analyzer - Settings</title>
+  <link rel="stylesheet" href="popup.css">
+  <style>
+    .settings-container {
+      padding: 16px;
+    }
+
+    .settings-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .settings-header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ff0000;
+    }
+
+    .back-btn {
+      font-size: 20px;
+      text-decoration: none;
+      color: #333;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .back-btn:hover {
+      opacity: 1;
+    }
+
+    .settings-section {
+      margin-bottom: 20px;
+    }
+
+    .settings-section label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    .settings-section input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .settings-section input:focus {
+      outline: none;
+      border-color: #ff0000;
+    }
+
+    .settings-section input.valid {
+      border-color: #28a745;
+    }
+
+    .settings-section input.invalid {
+      border-color: #dc3545;
+    }
+
+    .helper-text {
+      font-size: 12px;
+      color: #666;
+      margin-top: 6px;
+    }
+
+    .helper-text a {
+      color: #ff0000;
+      text-decoration: none;
+    }
+
+    .helper-text a:hover {
+      text-decoration: underline;
+    }
+
+    #saveBtn {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff0000;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    #saveBtn:hover {
+      background-color: #cc0000;
+    }
+
+    #saveBtn:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+
+    .success-message {
+      display: none;
+      padding: 12px;
+      background-color: #d4edda;
+      border: 1px solid #c3e6cb;
+      border-radius: 6px;
+      color: #155724;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .error-message {
+      display: none;
+      padding: 10px;
+      background-color: #fee;
+      border: 1px solid #fcc;
+      border-radius: 6px;
+      color: #c00;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .key-status {
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .key-status.valid {
+      color: #28a745;
+    }
+
+    .key-status.invalid {
+      color: #dc3545;
+    }
+
+    .key-status.empty {
+      color: #666;
+    }
+
+    .toggle-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: #f9f9f9;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+
+    .toggle-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .toggle-desc {
+      font-size: 12px;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 48px;
+      height: 26px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.3s;
+      border-radius: 26px;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+
+    .toggle-switch input:checked + .toggle-slider {
+      background-color: #ff0000;
+    }
+
+    .toggle-switch input:checked + .toggle-slider:before {
+      transform: translateX(22px);
+    }
+  </style>
+</head>
+<body>
+  <div class="settings-container">
+    <div class="settings-header">
+      <a href="popup.html" class="back-btn" title="Back to Analyzer">←</a>
+      <h1>⚙️ Settings</h1>
+      <div style="width: 24px;"></div>
+    </div>
+
+    <div class="success-message" id="successMessage">
+      ✓ Settings saved!
+    </div>
+
+    <div class="toggle-section">
+      <div>
+        <div class="toggle-label">Show Full Analysis</div>
+        <div class="toggle-desc">Show Main + Thumbnail Analysis</div>
+      </div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="showFullAnalysisToggle">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <div class="toggle-section">
+      <div>
+        <div class="toggle-label">Show Thumbnail</div>
+        <div class="toggle-desc">Show clickable video thumbnail</div>
+      </div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="showThumbnailToggle">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <div class="settings-section">
+      <label for="youtubeApiKey">YouTube Data API Key</label>
+      <input type="password" id="youtubeApiKey" placeholder="AIza..." autocomplete="off">
+      <div class="key-status" id="youtubeStatus"></div>
+      <p class="helper-text">
+        Get your key from <a href="https://console.cloud.google.com/apis/credentials" target="_blank">Google Cloud Console</a>
+      </p>
+      <div class="error-message" id="youtubeError"></div>
+    </div>
+
+    <div class="settings-section">
+      <label for="groqApiKey">Groq API Key</label>
+      <input type="password" id="groqApiKey" placeholder="gsk_..." autocomplete="off">
+      <div class="key-status" id="groqStatus"></div>
+      <p class="helper-text">
+        Get your key from <a href="https://console.groq.com/" target="_blank">Groq Console</a>
+      </p>
+      <div class="error-message" id="groqError"></div>
+    </div>
+
+    <button id="saveBtn">Save Settings</button>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>
